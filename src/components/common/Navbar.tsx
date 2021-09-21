@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
               <Menu.Button as="div" className="flex font-semibold text-lg text-gray-100 cursor-pointer hover:text-gray-400">
                 <GiHamburgerMenu />
               </Menu.Button>
-              <Menu.Items as="div" className="w-max mt-1 flex flex-col space-y-1 w-32 absolute p-2 bg-white outline-none border border-gray-300 rounded shadow right-4">
+              <Menu.Items as="div" className="w-max mt-1 flex flex-col space-y-1 absolute p-2 bg-white outline-none border border-gray-300 rounded shadow right-4">
                 {navbarItems.map(({ to, title }) => (
-                  <Link key={`vgnr-${name}`} href={to} passHref>
+                  <Link key={`vgnr-${title}`} href={to} passHref>
                     <Menu.Item as="div" className="flex items-center py-1 cursor-pointer font-semibold px-2.5 text-blue-900 duration-150 hover:bg-blue-900 hover:text-gray-100 rounded-md">
                       <div className="container text-center">{title}</div>
                     </Menu.Item>
