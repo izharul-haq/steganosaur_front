@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { decryptFile, decryptText, encryptFile, encryptText } from '~/api/modrc4';
+import { saveAsTextFile } from '~/utils/text';
 import OutputTable from './OutputTable';
 
 type ModRC4Input = {
@@ -147,6 +148,17 @@ const ModifiedRC4Dashboard: React.FC = () => {
       <div className="mb-3">
         <OutputTable output={result} />
       </div>
+      <div className="flex justify-between">
+          <div></div>
+          <div>
+            <button
+              className="button button-primary"
+              onClick={() => saveAsTextFile(`mod-RC4-${mode}rypted`, result)}
+            >
+              Save as .txt File
+            </button>
+          </div>
+        </div>
     </div>
   );
 };
