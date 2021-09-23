@@ -9,7 +9,7 @@ const MainDashboard: React.FC = () => {
           <GiDinosaurBones fontSize="20rem" />
         </div>
         <div className="text-xl">
-          Buried in file. Dig me plz
+          Mi ded, hlpz.
         </div>
       </div>
     </div>

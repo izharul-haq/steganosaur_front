@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { decryptText, encryptText } from '~/api/modrc4';
+import { decryptFile, decryptText, encryptFile, encryptText } from '~/api/modrc4';
 import OutputTable from './OutputTable';
 
 type ModRC4Input = {
@@ -22,7 +22,8 @@ const ModifiedRC4Dashboard: React.FC = () => {
       const res = await encryptText(data.text, data.key);
       setResult(res);
     } else {
-      // TODO: handle file input
+      const filenameSplit = data.file[0].name.split('.');
+      await encryptFile(data.file[0], data.key, filenameSplit[filenameSplit.length - 1]);
     }
   };
 
@@ -32,7 +33,8 @@ const ModifiedRC4Dashboard: React.FC = () => {
       const res = await decryptText(arr, data.key);
       setResult(res);
     } else {
-      // TODO: handle file input
+      const filenameSplit = data.file[0].name.split('.');
+      await decryptFile(data.file[0], data.key, filenameSplit[filenameSplit.length - 1]);
     }
 
     console.log(mode);
