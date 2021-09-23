@@ -31,3 +31,15 @@ Install dependencies with
 2. Open `localhost:8080` on your browser
 
 ## How to Use
+
+0. Make sure [backend-side](https://github.com/izharul-haq/steganosaur_back) of this web application is running.
+
+1. Run this application (follow [How to Run](#how-to-run))
+
+2. Click menu icon on the top-right side of the screen.
+
+3. Select between Modified RC4 or Steganography page.
+
+4. Type/upload all necessary input.
+
+5. Click Encrypt/Decrypt or Show/Hide button.
