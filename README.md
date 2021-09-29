@@ -12,7 +12,7 @@ Frontend-side of Steganosaur, web application to hide message. For the backend-s
 
 Install dependencies with
 
-    yarn install.
+    yarn install
 
 ## How to Run
 
