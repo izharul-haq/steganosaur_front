@@ -44,7 +44,7 @@ const SteganoShowDashboard: React.FC = () => {
               </td>
             </tr>
             <tr className="text-center">
-              <td className="table-cell" colSpan={1}>Mask</td>
+              <td className="table-cell" colSpan={1}>Masked File</td>
               <td className="table-cell" colSpan={3}>
                 <button
                   type="button"
