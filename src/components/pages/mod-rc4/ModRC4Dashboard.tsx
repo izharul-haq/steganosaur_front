@@ -95,6 +95,7 @@ const ModifiedRC4Dashboard: React.FC = () => {
               <td className="table-cell">File Input</td>
               <td className="table-cell">
                 <button
+                  type="button"
                   className="button button-primary"
                   onClick={() => document.getElementById('file-input')?.click()}
                 >
