@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-type SteganoInput = {
-  encrypt: 0 | 1;
+type SteganoHideInput = {
+  key?: string;
   mask: FileList;
   content: FileList;
-  mode?: 'sequential' | 'random';
+  mode: 'sequential' | 'random';
 };
 
-const SteganoDashboard: React.FC = () => {
-  const [mode, setMode] = useState<'hide' | 'show'>('hide');
+const SteganoHideDashboard: React.FC = () => {
   const [mask, setMask] = useState<string | undefined>();
   const [content, setContent] = useState<string | undefined>();
   
   const { register, handleSubmit } = useForm();
   
-  const onHide = async (data: SteganoInput) => {
-    console.log(mode);
+  const onHide = async (data: SteganoHideInput) => {
     console.log(data);
   };
-
-  const onShow = async (data: SteganoInput) => {
-    console.log(mode);
-    console.log(data);
-  }
 
   return (
     <div className="page-container">
@@ -33,7 +26,7 @@ const SteganoDashboard: React.FC = () => {
       <form
         id="stegano-input"
         className="mb-3 overflow-auto shadow rounded-lg"
-        onSubmit={handleSubmit(mode === 'hide' ? onHide : onShow)}
+        onSubmit={handleSubmit(onHide)}
       >
         <table className="table-auto min-w-max text-sm w-full text-[1rem]">
           <thead>
@@ -43,34 +36,21 @@ const SteganoDashboard: React.FC = () => {
           </thead>
           <tbody className="table-body">
             <tr className="text-center">
-              <td className="table-cell" colSpan={1}>Encrypt Message</td>
-              <td className="p-2 flex flex-row justify-around items-center" colSpan={3}>
-                <div className="flex p-2 space-x-2 items-center">
-                  <input
-                    type="radio"
-                    id="encrypt-message"
-                    required
-                    value={1}
-                    {...register('encrypt', { required: true, setValueAs: parseInt })}
-                  />
-                  <label htmlFor="encrypt-message">Encrypt message</label>
-                </div>
-                <div className="flex p-2 space-x-2 items-center">
-                  <input
-                    type="radio"
-                    id="not-encrypt-message"
-                    required
-                    value={0}
-                    {...register('encrypt', { required: true, setValueAs: parseInt })}
-                  />
-                  <label htmlFor="not-encrypt-message">Don{'\''}t encrypt message</label>
-                </div>
+              <td className="table-cell" colSpan={1}>Encryption Key</td>
+              <td className="p-2 flex flex-row justify-evenly items-center" colSpan={3}>
+                <input
+                  className="input-text"
+                  type="text"
+                  placeholder="Key to encrypt file (if needed)"
+                  {...register('key')}
+                />
               </td>
             </tr>
             <tr className="text-center">
               <td className="table-cell" colSpan={1}>Mask</td>
               <td className="table-cell" colSpan={3}>
                 <button
+                  type="button"
                   className="button button-primary"
                   onClick={() => document.getElementById('mask-input')?.click()}
                 >
@@ -89,6 +69,7 @@ const SteganoDashboard: React.FC = () => {
               <td className="table-cell" colSpan={1}>Content</td>
               <td className="table-cell" colSpan={3}>
                 <button
+                  type="button"
                   className="button button-primary"
                   onClick={() => document.getElementById('content-input')?.click()}
                 >
@@ -105,14 +86,14 @@ const SteganoDashboard: React.FC = () => {
             </tr>
             <tr className="text-center">
               <td className="table-cell" colSpan={1}>Mode</td>
-              <td className="p-2 flex flex-row justify-around items-center" colSpan={3}>
+              <td className="p-2 flex flex-row justify-evenly items-center" colSpan={3}>
                 <div className="flex p-2 space-x-2 items-center">
                   <input
                     type="radio"
                     id="sequential"
-                    required={mode === 'hide'}
+                    required
                     value={'sequential'}
-                    {...register('mode', { required: mode === 'hide' })}
+                    {...register('mode')}
                   />
                   <label htmlFor="sequential">Sequential</label>
                 </div>
@@ -120,9 +101,9 @@ const SteganoDashboard: React.FC = () => {
                   <input
                     type="radio"
                     id="random"
-                    required={mode === 'hide'}
+                    required
                     value={'random'}
-                    {...register('mode', { required: mode === 'hide' })}
+                    {...register('mode')}
                   />
                   <label htmlFor="random">Random</label>
                 </div>
@@ -139,17 +120,8 @@ const SteganoDashboard: React.FC = () => {
               className="button button-primary"
               type="submit"
               form="stegano-input"
-              onClick={() => setMode('hide')}
             >
               Hide
-            </button>
-            <button
-              className="button button-secondary"
-              type="submit"
-              form="stegano-input"
-              onClick={() => setMode('show')}
-            >
-              Show
             </button>
           </div>
         </div>
@@ -158,4 +130,4 @@ const SteganoDashboard: React.FC = () => {
   );
 };
 
-export default SteganoDashboard;
+export default SteganoHideDashboard;

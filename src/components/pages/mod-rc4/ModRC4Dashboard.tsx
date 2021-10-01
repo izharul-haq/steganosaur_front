@@ -60,56 +60,59 @@ const ModifiedRC4Dashboard: React.FC = () => {
           <tbody className="table-body">
             <tr className="text-center">
               <td className="table-cell" colSpan={1}>Input Type</td>
-                <td className="table-cell" colSpan={3}>
-                  <div className="flex flex-row space-x-2">
-                    <button
-                      className={`button button-${inputType === 'text' ? 'primary' : 'secondary' }`}
-                      onClick={() => setInputType('text')}
-                    >
-                      Text
-                    </button>
-                    <button
-                      className={`button button-${inputType === 'file' ? 'primary' : 'secondary' }`}
-                      onClick={() => setInputType('file')}
-                    >
-                      File
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr className={`text-center ${inputType === 'text' ? '' : 'hidden'}`}>
-                <td className="table-cell">Text Input</td>
-                <td className="table-cell">
-                  <input
-                    className="input-text"
-                    type="text"
-                    placeholder="Plaintext or ciphertext"
-                    required={inputType === 'text'}
-                    {...register('text', { required: inputType === 'text' })}
-                  />
-                </td>
-              </tr>
-              <tr className={`text-center ${inputType === 'file' ? '' : 'hidden'}`}>
-                <td className="table-cell">File Input</td>
-                <td className="table-cell">
+              <td className="table-cell" colSpan={3}>
+                <div className="flex flex-row space-x-2">
                   <button
-                    className="button button-primary"
-                    onClick={() => document.getElementById('file-input')?.click()}
+                    type="button"
+                    className={`button button-${inputType === 'text' ? 'primary' : 'secondary' }`}
+                    onClick={() => setInputType('text')}
                   >
-                    {file ? file : 'Choose File'}
-                    <input
-                      className="hidden"
-                      type="file"
-                      id="file-input"
-                      {...register('file')}
-                      onInput={() => setFile((document.getElementById('file-input') as HTMLInputElement).value.substr(12))}
-                    />
+                    Text
                   </button>
-                </td>
-              </tr>
-              <tr className="text-center">
-                <td className="table-cell" colSpan={1}>Cipher Key</td>
-                <td className="table-cell" colSpan={3}>
+                  <button
+                    type="button"
+                    className={`button button-${inputType === 'file' ? 'primary' : 'secondary' }`}
+                    onClick={() => setInputType('file')}
+                  >
+                    File
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr className={`text-center ${inputType === 'text' ? '' : 'hidden'}`}>
+              <td className="table-cell">Text Input</td>
+              <td className="table-cell">
+                <input
+                  className="input-text"
+                  type="text"
+                  placeholder="Plaintext or ciphertext"
+                  required={inputType === 'text'}
+                  {...register('text', { required: inputType === 'text' })}
+                />
+              </td>
+            </tr>
+            <tr className={`text-center ${inputType === 'file' ? '' : 'hidden'}`}>
+              <td className="table-cell">File Input</td>
+              <td className="table-cell">
+                <button
+                  className="button button-primary"
+                  onClick={() => document.getElementById('file-input')?.click()}
+                >
+                  {file ? file : 'Choose File'}
+                  <input
+                    className="hidden"
+                    type="file"
+                    id="file-input"
+                    required={inputType === 'file'}
+                    {...register('file', { required: inputType === 'file' })}
+                    onInput={() => setFile((document.getElementById('file-input') as HTMLInputElement).value.substr(12))}
+                  />
+                </button>
+              </td>
+            </tr>
+            <tr className="text-center">
+              <td className="table-cell" colSpan={1}>Cipher Key</td>
+              <td className="table-cell" colSpan={3}>
                 <input
                   className="input-text"
                   type="text"
@@ -145,7 +148,7 @@ const ModifiedRC4Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mb-3">
+      <div className="mb-3 overflow-auto shadow rounded-lg">
         <OutputTable output={result} />
       </div>
       <div className="flex justify-between">
