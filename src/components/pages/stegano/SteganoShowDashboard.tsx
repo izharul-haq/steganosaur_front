@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { showFileInAudio } from '~/api/stegano';
 
 type SteganoShowInput = {
   key?: string;
@@ -12,7 +13,7 @@ const SteganoShowDashboard: React.FC = () => {
   const { register, handleSubmit } = useForm();
   
   const onShow = async (data: SteganoShowInput) => {
-    console.log(data);
+    await showFileInAudio(data.masked[0], data.key);
   };
 
   return (

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { hideFileInAudio } from '~/api/stegano';
 
 type SteganoHideInput = {
   key?: string;
   mask: FileList;
   content: FileList;
-  mode: 'sequential' | 'random';
+  mode: 'seq' | 'rand';
 };
 
 const SteganoHideDashboard: React.FC = () => {
@@ -15,7 +16,12 @@ const SteganoHideDashboard: React.FC = () => {
   const { register, handleSubmit } = useForm();
   
   const onHide = async (data: SteganoHideInput) => {
-    console.log(data);
+    const maskSplit = data.mask[0].name.split('.');
+    const maskType = maskSplit[maskSplit.length - 1];
+
+    if (maskType === 'wav') {
+      await hideFileInAudio(data.mask[0], data.content[0], data.mode, data.key)
+    }
   };
 
   return (
@@ -92,7 +98,7 @@ const SteganoHideDashboard: React.FC = () => {
                     type="radio"
                     id="sequential"
                     required
-                    value={'sequential'}
+                    value={'seq'}
                     {...register('mode')}
                   />
                   <label htmlFor="sequential">Sequential</label>
@@ -102,7 +108,7 @@ const SteganoHideDashboard: React.FC = () => {
                     type="radio"
                     id="random"
                     required
-                    value={'random'}
+                    value={'rand'}
                     {...register('mode')}
                   />
                   <label htmlFor="random">Random</label>
